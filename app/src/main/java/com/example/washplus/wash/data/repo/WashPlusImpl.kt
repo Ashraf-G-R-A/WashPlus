@@ -1,0 +1,29 @@
+package com.example.washplus.wash.data.repo
+
+import com.example.washplus.network.local.WashPlusDao
+import com.example.washplus.wash.data.model.ProductDto
+import com.example.washplus.wash.domain.repo.IWashPlus
+import javax.inject.Inject
+
+class WashPlusImpl @Inject constructor(private val washPlusDao: WashPlusDao): IWashPlus {
+    override suspend fun addProduct(productDto: ProductDto) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun deleteProduct(productDto: ProductDto) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getAllProducts(): List<ProductDto> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun payProduct(id: Int) {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun updateProduct(productDto: ProductDto) {
+        TODO("Not yet implemented")
+    }
+
+}

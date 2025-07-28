@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -5,10 +7,17 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("org.jetbrains.kotlin.kapt")
 }
+val localProperties = Properties()
+localProperties.load(rootProject.file("local.properties").inputStream())
+val washPlusDatabaseName = localProperties["DATABASE_NAME"] as String
 
 android {
     namespace = "com.example.washplus"
     compileSdk = 35
+
+    buildFeatures {
+        buildConfig = true
+    }
 
     defaultConfig {
         applicationId = "com.example.washplus"
@@ -16,7 +25,11 @@ android {
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"
-
+        buildConfigField(
+            "String",
+            "NEWS_DATABASE_NAME",
+            "\"$washPlusDatabaseName\""
+        )
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
