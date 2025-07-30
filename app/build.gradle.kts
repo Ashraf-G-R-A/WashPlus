@@ -87,8 +87,6 @@ dependencies {
     implementation("com.google.accompanist:accompanist-pager-indicators:0.28.0")
 
 
-
-
     implementation("com.google.dagger:hilt-android:2.48")
     kapt("com.google.dagger:hilt-compiler:2.48")
 

@@ -11,6 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.example.washplus.navigation.AppNavGraph
 import com.example.washplus.ui.theme.WashPlusTheme
 
 class MainActivity : ComponentActivity() {
@@ -19,12 +21,16 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WashPlusTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+                val navController = rememberNavController()
+                Scaffold(
+                    modifier = Modifier.fillMaxSize(),
+                    content = { padding ->
+                        AppNavGraph(
+                            navController = navController,
+                            paddingValues = padding
+                        )
+                    }
+                )
             }
         }
     }

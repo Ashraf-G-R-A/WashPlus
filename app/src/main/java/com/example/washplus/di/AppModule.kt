@@ -12,9 +12,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
-
     @Provides
     @Named("databaseName")
     fun provideDataBaseName(): String = BuildConfig.NEWS_DATABASE_NAME
+
 
 }
