@@ -16,6 +16,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -31,27 +32,19 @@ fun WashPlusBottomNavigation(
 
     NavigationBar(
         modifier = Modifier.fillMaxWidth(),
-        containerColor = MaterialTheme.colorScheme.background,
-        contentColor = MaterialTheme.colorScheme.onBackground
+        containerColor = Color.White,
+        contentColor = Color.White
     ) {
         items.forEachIndexed { index, item ->
             NavigationBarItem(
                 selected = selectedItem == index,
                 onClick = { onItemClick(index) },
                 icon = {
-                    Column(
-                        horizontalAlignment = CenterHorizontally
-                    ) {
+                    Column(horizontalAlignment = CenterHorizontally) {
                         Icon(
                             painter = painterResource(id = item.icon),
                             contentDescription = item.text,
-                            tint = if (selectedItem == index) {
-                                MaterialTheme.colorScheme.primary
-                            } else {
-                                MaterialTheme.colorScheme.onBackground
-                            },
                             modifier = Modifier.size(20.dp)
-
                         )
                         Spacer(modifier = Modifier.padding(4.dp))
                         Text(
@@ -61,14 +54,14 @@ fun WashPlusBottomNavigation(
                     }
                 },
                 colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = MaterialTheme.colorScheme.primary,
-                    selectedTextColor = MaterialTheme.colorScheme.primary,
-                    indicatorColor = MaterialTheme.colorScheme.background,
+                    selectedIconColor = Color.White,
+                    selectedTextColor = Color.White,
+                    indicatorColor = Color.Black,
                     unselectedIconColor = MaterialTheme.colorScheme.onBackground,
                     unselectedTextColor = MaterialTheme.colorScheme.onBackground
-
                 )
             )
+
 
         }
     }

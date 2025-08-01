@@ -43,7 +43,7 @@ fun ProductItemCard(
                     color = Color.Black
                 )
                 Text(
-                    text = "${article.price} EGP",
+                    text = "${article.price} جنية",
                     style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Bold),
                     color = Color.Black
                 )
@@ -53,15 +53,19 @@ fun ProductItemCard(
                 modifier = Modifier
                     .align(Alignment.End)
                     .padding(top = 16.dp)
-                    .background(Color(0xFFF1F1F1), shape = RoundedCornerShape(4.dp))
+                    .background(
+                        color = if (article.count < 5) Color.Red else Color(0xFFF1F1F1),
+                        shape = RoundedCornerShape(4.dp)
+                    )
                     .padding(horizontal = 8.dp, vertical = 4.dp)
             ) {
                 Text(
                     text = article.count.toString(),
                     style = MaterialTheme.typography.bodySmall,
-                    color = Color.Black
+                    color = if (article.count < 5) Color.White else Color.Black
                 )
             }
+
         }
     }
 }

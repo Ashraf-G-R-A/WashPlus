@@ -2,6 +2,7 @@ package com.example.washplus.wash.domain.usecase
 
 import com.example.washplus.wash.data.model.ProductDto
 import com.example.washplus.wash.domain.repo.IWashPlus
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 class WashPlusUseCase @Inject constructor(val washPlusRepository: IWashPlus) {
@@ -13,9 +14,10 @@ class WashPlusUseCase @Inject constructor(val washPlusRepository: IWashPlus) {
         washPlusRepository.deleteProduct(productDto)
     }
 
-    suspend fun getAllProducts(): List<ProductDto> {
+    suspend fun getAllProducts(): Flow<List<ProductDto>> {
         return washPlusRepository.getAllProducts()
     }
+
 
     suspend fun payProduct(id: Int) {
         washPlusRepository.payProduct(id)

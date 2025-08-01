@@ -1,5 +1,6 @@
 package com.example.washplus.wash.presentaion.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -9,6 +10,7 @@ import com.example.washplus.wash.data.mapper.toDto
 import com.example.washplus.wash.domain.model.MapperProductDto
 import com.example.washplus.wash.domain.usecase.WashPlusUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -26,19 +28,25 @@ class WashPlusViewModel @Inject constructor(
     private val _selectedProduct = MutableLiveData<MapperProductDto?>()
     val selectedProduct: LiveData<MapperProductDto?> = _selectedProduct
 
+
+    init {
+        getAllProducts()
+    }
+
     fun getAllProducts() {
         viewModelScope.launch {
-            _isLoading.value = true
-            try {
-                val products = repository.getAllProducts()
-                _products.value = products.map { it.toDomain() }
-            } catch (e: Exception) {
-                _products.value = emptyList()
-            } finally {
-                _isLoading.value = false
-            }
+            repository.getAllProducts()
+                .map { list ->
+                    list.map { it.toDomain() }
+                        .sortedBy { it.count }
+                }
+                .collect { mappedList ->
+                    _products.value = mappedList
+                }
         }
     }
+
+
 
     fun addProduct(productDto: MapperProductDto) {
         viewModelScope.launch {

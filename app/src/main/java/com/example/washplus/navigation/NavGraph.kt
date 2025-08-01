@@ -9,7 +9,10 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.washplus.splash.SplashScreen
+import com.example.washplus.wash.presentaion.view.AddProductScreen
 import com.example.washplus.wash.presentaion.view.HomeScreen
+import com.example.washplus.wash.presentaion.view.ReportScreen
+import com.example.washplus.wash.presentaion.view.SealsScreen
 
 
 @Composable
@@ -27,13 +30,15 @@ fun AppNavGraph(navController: NavHostController, paddingValues: PaddingValues) 
             HomeScreen(navAddProduct = { navController.navigate(Routes.AddProduct.route) })
         }
         composable(Routes.AddProduct.route) {
+            AddProductScreen(navigateBack = { navController.popBackStack() })
 
         }
         composable(Routes.Sales.route) {
+            SealsScreen()
 
         }
         composable(Routes.Reports.route) {
-
+            ReportScreen()
         }
 
     }

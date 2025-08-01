@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -17,6 +18,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.washplus.R
@@ -27,39 +30,56 @@ fun WashPlusEditText(
     title: String,
     text: String,
     des: String,
-    onTextChange: (String) -> Unit
+    onTextChange: (String) -> Unit,
+    isNumber: Boolean = false
 ) {
     Column(modifier = Modifier.fillMaxWidth()) {
         Text(
             text = title,
             style = MaterialTheme.typography.bodySmall,
-            modifier = Modifier.padding(bottom = 4.dp)
-        )
+            modifier = Modifier.padding(bottom = 4.dp),
+
+            )
 
         TextField(
             value = text,
             onValueChange = onTextChange,
-            placeholder = { Text(des) },
+            placeholder = { Text(des, color = Color.White) },
             modifier = Modifier
                 .fillMaxWidth()
                 .background(
-                    color = colorResource(R.color.gray50),
+                    color = colorResource(R.color.shimmer),
                     shape = RoundedCornerShape(8.dp)
                 ),
             singleLine = true,
             shape = RoundedCornerShape(8.dp),
             colors = TextFieldDefaults.colors(
-                focusedContainerColor = colorResource(R.color.gray50),
-                unfocusedContainerColor = colorResource(R.color.gray50),
-                disabledContainerColor = colorResource(R.color.gray50),
+                focusedContainerColor = colorResource(R.color.shimmer),
+                unfocusedContainerColor = colorResource(R.color.shimmer),
+                disabledContainerColor = colorResource(R.color.shimmer),
                 focusedIndicatorColor = Color.Transparent,
                 unfocusedIndicatorColor = Color.Transparent,
                 disabledIndicatorColor = Color.Transparent
+            ),
+            keyboardOptions = if (isNumber) {
+                KeyboardOptions(
+                    keyboardType = KeyboardType.Number,
+                    imeAction = ImeAction.Next
+                )
+            } else {
+                KeyboardOptions.Default
+            },
+            textStyle = MaterialTheme.typography.bodyLarge.copy(
+                localeList = androidx.compose.ui.text.intl.LocaleList(
+                    androidx.compose.ui.text.intl.Locale(
+                        "ar"
+                    )
+                )
             )
         )
-
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable

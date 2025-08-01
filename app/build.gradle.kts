@@ -85,6 +85,7 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.7.0")
     implementation("com.google.accompanist:accompanist-pager:0.28.0")
     implementation("com.google.accompanist:accompanist-pager-indicators:0.28.0")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.5")
 
 
     implementation("com.google.dagger:hilt-android:2.48")

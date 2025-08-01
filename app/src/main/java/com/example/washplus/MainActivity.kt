@@ -15,7 +15,9 @@ import androidx.navigation.compose.rememberNavController
 import com.example.washplus.navigation.AppNavGraph
 import com.example.washplus.ui.theme.WashPlusTheme
 import com.example.washplus.wash.presentaion.view.WashPlusNavigation
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
