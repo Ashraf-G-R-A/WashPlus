@@ -10,5 +10,5 @@ import com.example.washplus.wash.domain.model.MapperProductDto
     exportSchema = false
 )
 abstract class WashPlusDatabase : RoomDatabase() {
-    abstract fun washPlusDao(): WashPlusDao
+    abstract val newsDao: WashPlusDao
 }

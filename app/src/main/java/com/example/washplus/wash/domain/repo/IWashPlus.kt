@@ -8,4 +8,5 @@ interface IWashPlus {
     suspend fun getAllProducts(): List<ProductDto>
     suspend fun payProduct(id: Int)
     suspend fun updateProduct(productDto: ProductDto)
+    suspend fun getProductById(id: Int): ProductDto
 }

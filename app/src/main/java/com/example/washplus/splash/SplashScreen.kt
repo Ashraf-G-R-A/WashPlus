@@ -1,5 +1,6 @@
 package com.example.washplus.splash
 
+import android.window.SplashScreen
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -12,6 +13,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.washplus.R
 import kotlinx.coroutines.delay
@@ -21,7 +23,7 @@ fun SplashScreen(
     navHome: () -> Unit,
 ) {
     LaunchedEffect(Unit) {
-        delay(2000)
+        delay(4000)
         navHome()
     }
     Box(
@@ -34,8 +36,14 @@ fun SplashScreen(
             painter = painterResource(id = R.drawable.logo),
             contentDescription = null,
             modifier = Modifier
-                .height(100.dp)
+                .height(140.dp)
                 .fillMaxWidth()
         )
     }
+}
+
+@Preview
+@Composable
+fun SplashScreenPreview() {
+    SplashScreen(navHome = {})
 }

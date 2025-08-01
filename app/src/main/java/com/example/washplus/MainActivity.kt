@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.rememberNavController
 import com.example.washplus.navigation.AppNavGraph
 import com.example.washplus.ui.theme.WashPlusTheme
+import com.example.washplus.wash.presentaion.view.WashPlusNavigation
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,16 +22,7 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             WashPlusTheme {
-                val navController = rememberNavController()
-                Scaffold(
-                    modifier = Modifier.fillMaxSize(),
-                    content = { padding ->
-                        AppNavGraph(
-                            navController = navController,
-                            paddingValues = padding
-                        )
-                    }
-                )
+                WashPlusNavigation()
             }
         }
     }

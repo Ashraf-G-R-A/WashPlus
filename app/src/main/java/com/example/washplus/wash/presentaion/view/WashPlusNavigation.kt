@@ -46,16 +46,20 @@ fun WashPlusNavigation() {
         else -> 0
     }
 
+    val isSplash = backstackState?.destination?.route == Routes.Splash.route
+
     Scaffold(
         bottomBar = {
-            NewsBottomNavigation(
-                items = bottomNavigationItems,
-                selectedItem = selectedItem,
-            ) { index ->
-                when (index) {
-                    0 -> navigationToTop(navController, Routes.Home.route)
-                    1 -> navigationToTop(navController, Routes.Sales.route)
-                    2 -> navigationToTop(navController, Routes.Reports.route)
+            if (!isSplash) {
+                WashPlusBottomNavigation(
+                    items = bottomNavigationItems,
+                    selectedItem = selectedItem,
+                ) { index ->
+                    when (index) {
+                        0 -> navigationToTop(navController, Routes.Home.route)
+                        1 -> navigationToTop(navController, Routes.Sales.route)
+                        2 -> navigationToTop(navController, Routes.Reports.route)
+                    }
                 }
             }
         },

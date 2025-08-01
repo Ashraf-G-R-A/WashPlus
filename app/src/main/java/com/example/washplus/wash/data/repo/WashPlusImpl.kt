@@ -26,4 +26,8 @@ class WashPlusImpl @Inject constructor(private val washPlusDao: WashPlusDao): IW
         TODO("Not yet implemented")
     }
 
+    override suspend fun getProductById(id: Int): ProductDto {
+        TODO("Not yet implemented")
+    }
+
 }

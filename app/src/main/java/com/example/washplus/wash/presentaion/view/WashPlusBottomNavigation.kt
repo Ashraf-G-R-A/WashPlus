@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -22,7 +23,7 @@ import com.example.washplus.R
 import com.example.washplus.ui.theme.WashPlusTheme
 
 @Composable
-fun NewsBottomNavigation(
+fun WashPlusBottomNavigation(
     items: List<BottomNavigationItem>,
     selectedItem: Int,
     onItemClick: (Int) -> Unit
@@ -48,7 +49,8 @@ fun NewsBottomNavigation(
                                 MaterialTheme.colorScheme.primary
                             } else {
                                 MaterialTheme.colorScheme.onBackground
-                            }
+                            },
+                            modifier = Modifier.size(20.dp)
 
                         )
                         Spacer(modifier = Modifier.padding(4.dp))
@@ -84,7 +86,7 @@ data class BottomNavigationItem(
 @Composable
 fun NewsBottomNavigationPreview() {
     WashPlusTheme {
-        NewsBottomNavigation(
+        WashPlusBottomNavigation(
             items = listOf(
                 BottomNavigationItem(
                     icon = R.drawable.ic_home,

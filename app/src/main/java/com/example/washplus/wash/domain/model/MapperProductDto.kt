@@ -11,4 +11,5 @@ data class MapperProductDto(
     val description: String,
     val price: Double,
     val count: Int,
+    val date: String
 )

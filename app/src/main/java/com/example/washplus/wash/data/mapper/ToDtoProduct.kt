@@ -3,9 +3,8 @@ package com.example.washplus.wash.data.mapper
 import com.example.washplus.wash.data.model.ProductDto
 import com.example.washplus.wash.domain.model.MapperProductDto
 
-
-fun ProductDto.toDomain(): MapperProductDto {
-    return MapperProductDto(
+fun MapperProductDto.toDto(): ProductDto {
+    return ProductDto(
         id = id,
         title = title,
         description = description,
