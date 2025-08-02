@@ -2,6 +2,7 @@ package com.example.washplus.wash.presentaion.minview
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -24,6 +25,7 @@ fun ProductItemCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
+            .clickable { onClick() }
             .border(
                 width = 1.dp,
                 color = Color(0xFFE0E0E0),

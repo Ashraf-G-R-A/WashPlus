@@ -11,11 +11,18 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 import javax.inject.Singleton
-
-
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    val MIGRATION_3_4 = object : Migration(3, 4) {
+        override fun migrate(database: SupportSQLiteDatabase) {
+            database.execSQL("ALTER TABLE SaleDto ADD COLUMN date TEXT NOT NULL DEFAULT ''")
+        }
+    }
+
     @Provides
     @Named("databaseName")
     fun provideDataBaseName(): String = BuildConfig.NEWS_DATABASE_NAME
@@ -30,11 +37,12 @@ object AppModule {
             context = context,
             klass = WashPlusDatabase::class.java,
             name = databaseName
-        ).fallbackToDestructiveMigration().build()
+        )
+            .addMigrations(MIGRATION_3_4)
+            .build()
     }
 
     @Provides
     @Singleton
     fun provideNewsDao(newsDataBase: WashPlusDatabase) = newsDataBase.newsDao
-
 }

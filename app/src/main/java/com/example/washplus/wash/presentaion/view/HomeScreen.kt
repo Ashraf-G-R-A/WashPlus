@@ -8,6 +8,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
@@ -22,9 +23,11 @@ import com.example.washplus.wash.presentaion.viewmodel.WashPlusViewModel
 fun HomeScreen(
     navAddProduct: () -> Unit,
     viewModel: WashPlusViewModel = hiltViewModel(),
+    navProductDetails: (Int) -> Unit
 
-    ) {
+) {
     val productList by viewModel.products.observeAsState(initial = emptyList())
+
 
     Scaffold(
         containerColor = Color.White,
@@ -51,7 +54,7 @@ fun HomeScreen(
             ProductList(
                 productList = productList,
                 onCardClick = {
-
+                    navProductDetails(it.id)
                 }
             )
         }

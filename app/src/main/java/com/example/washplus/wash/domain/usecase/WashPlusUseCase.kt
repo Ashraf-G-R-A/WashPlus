@@ -1,6 +1,7 @@
 package com.example.washplus.wash.domain.usecase
 
 import com.example.washplus.wash.data.model.ProductDto
+import com.example.washplus.wash.data.model.SaleDto
 import com.example.washplus.wash.domain.repo.IWashPlus
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -10,8 +11,8 @@ class WashPlusUseCase @Inject constructor(val washPlusRepository: IWashPlus) {
         washPlusRepository.addProduct(productDto)
     }
 
-    suspend fun deleteProduct(productDto: ProductDto) {
-        washPlusRepository.deleteProduct(productDto)
+    suspend fun deleteProduct(productId: Int) {
+        washPlusRepository.deleteProduct(productId)
     }
 
     suspend fun getAllProducts(): Flow<List<ProductDto>> {
@@ -19,8 +20,8 @@ class WashPlusUseCase @Inject constructor(val washPlusRepository: IWashPlus) {
     }
 
 
-    suspend fun payProduct(id: Int) {
-        washPlusRepository.payProduct(id)
+    suspend fun payProduct(productDto: ProductDto) {
+        washPlusRepository.payProduct(productDto)
     }
 
     suspend fun updateProduct(productDto: ProductDto) {
@@ -30,6 +31,20 @@ class WashPlusUseCase @Inject constructor(val washPlusRepository: IWashPlus) {
     suspend fun getProductById(id: Int): ProductDto {
         return washPlusRepository.getProductById(id)
     }
+
+    suspend fun getSaleById(id: Int): SaleDto {
+        return washPlusRepository.getSaleById(id)
+    }
+
+    suspend fun deleteSaleProduct(id: Int) {
+        washPlusRepository.deleteSaleProduct(id)
+    }
+
+    fun getAllSales(): Flow<List<SaleDto>> {
+        return washPlusRepository.getAllSales()
+    }
+
+
 
 
 }

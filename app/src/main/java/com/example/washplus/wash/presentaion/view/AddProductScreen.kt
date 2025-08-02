@@ -15,6 +15,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.washplus.R
+import com.example.washplus.common.DateUtil
 import com.example.washplus.wash.domain.model.MapperProductDto
 import com.example.washplus.wash.presentaion.minview.WashPlusEditText
 import com.example.washplus.wash.presentaion.viewmodel.WashPlusViewModel
@@ -46,11 +47,11 @@ fun AddProductScreen(
     ) {
 
         CenterAlignedTopAppBar(
-            title = { Text("إضافة منتج",color = Color.Black) },
+            title = { Text("إضافة منتج", color = Color.Black) },
             navigationIcon = {
                 IconButton(onClick = { navigateBack() }) {
                     Icon(
-                        imageVector = Icons.Default.ArrowForward,
+                        imageVector = Icons.Default.ArrowBack,
                         contentDescription = "رجوع",
                         tint = Color.Black
                     )
@@ -110,17 +111,13 @@ fun AddProductScreen(
 
             Button(
                 onClick = {
-                    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale("ar"))
-                    dateFormat.timeZone = TimeZone.getDefault()
-                    val currentDate = dateFormat.format(Date())
-
                     val product = MapperProductDto(
                         id = 0,
                         title = name,
                         description = description,
                         price = price.toDouble(),
                         count = quantity.toInt(),
-                        date = currentDate
+                        date = DateUtil.getCurrentDate()
                     )
                     viewModel.addProduct(product)
                     navigateBack()
