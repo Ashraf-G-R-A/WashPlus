@@ -40,6 +40,9 @@ interface WashPlusDao {
     @Query("DELETE FROM sales_table WHERE id = :id")
     suspend fun deleteSale(id: Int)
 
-    @Query("SELECT * FROM sales_table")
+    @Query("SELECT * FROM sales_table ORDER BY date ASC")
     fun getAllSales(): Flow<List<SaleDto>>
+    @Query("SELECT * FROM sales_table ORDER BY date ASC")
+    suspend fun getAllSalesOnce(): List<SaleDto>
+
 }

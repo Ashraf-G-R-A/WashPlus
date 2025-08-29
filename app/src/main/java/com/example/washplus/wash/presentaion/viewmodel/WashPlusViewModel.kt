@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.washplus.wash.data.mapper.toDomain
 import com.example.washplus.wash.data.mapper.toDto
 import com.example.washplus.wash.data.model.ProductDto
+import com.example.washplus.wash.data.model.YearReport
 import com.example.washplus.wash.domain.model.MapperProductDto
 import com.example.washplus.wash.domain.usecase.WashPlusUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -36,9 +37,10 @@ class WashPlusViewModel @Inject constructor(
     init {
         getAllProducts()
         getSaleProducts()
+        loadReports()
     }
 
-    fun getAllProducts() {
+    private fun getAllProducts() {
         viewModelScope.launch {
             _isLoading.value = true
             repository.getAllProducts()
@@ -97,11 +99,12 @@ class WashPlusViewModel @Inject constructor(
             repository.payProduct(productDto)
             getAllProducts()
             getSaleProducts()
+            loadReports()
             _isLoading.value = false
         }
     }
 
-    fun getSaleProducts() {
+    private fun getSaleProducts() {
         viewModelScope.launch {
             _isLoading.value = true
             repository.getAllSales()
@@ -135,5 +138,23 @@ class WashPlusViewModel @Inject constructor(
         }
 
     }
+
+
+    private val _reports = MutableLiveData<List<YearReport>>()
+    val reports: LiveData<List<YearReport>> = _reports
+
+    fun loadReports() {
+        viewModelScope.launch {
+            try {
+                val result = repository.getAllSalesOnce()
+                _reports.value = result
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _reports.value = emptyList()
+            }
+        }
+    }
+
+
 }
 

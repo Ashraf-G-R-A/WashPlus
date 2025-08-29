@@ -1,12 +1,14 @@
 package com.example.washplus.wash.domain.usecase
 
+import android.util.Log
 import com.example.washplus.wash.data.model.ProductDto
 import com.example.washplus.wash.data.model.SaleDto
+import com.example.washplus.wash.data.model.YearReport
 import com.example.washplus.wash.domain.repo.IWashPlus
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
-class WashPlusUseCase @Inject constructor(val washPlusRepository: IWashPlus) {
+class WashPlusUseCase @Inject constructor(private val washPlusRepository: IWashPlus) {
     suspend fun addProduct(productDto: ProductDto) {
         washPlusRepository.addProduct(productDto)
     }
@@ -44,7 +46,9 @@ class WashPlusUseCase @Inject constructor(val washPlusRepository: IWashPlus) {
         return washPlusRepository.getAllSales()
     }
 
-
-
+    suspend fun getAllSalesOnce(): List<YearReport> {
+        Log.d("UseCase", "Getting all sales once ${washPlusRepository.getAllSalesOnce()}")
+        return washPlusRepository.getAllSalesOnce()
+    }
 
 }

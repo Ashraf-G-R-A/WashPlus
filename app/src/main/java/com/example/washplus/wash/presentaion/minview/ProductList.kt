@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -28,12 +29,11 @@ fun ProductList(
         }
 
         else -> {
-            LazyColumn(
-                modifier = modifier.fillMaxSize(),
-                verticalArrangement = Arrangement.spacedBy(8.dp),
-                contentPadding = PaddingValues(all = 8.dp)
+            Column(
+                modifier = modifier.fillMaxWidth(),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                items(productList) { product ->
+                productList.forEach { product ->
                     ProductItemCard(
                         article = product,
                         onClick = { onCardClick(product) }
@@ -43,6 +43,7 @@ fun ProductList(
         }
     }
 }
+
 
 @Composable
 private fun ShimmerEffect() {

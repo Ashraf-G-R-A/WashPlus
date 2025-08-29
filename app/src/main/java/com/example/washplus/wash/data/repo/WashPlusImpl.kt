@@ -1,12 +1,13 @@
 package com.example.washplus.wash.data.repo
 
-import com.example.washplus.common.DateUtil
+import DateUtil
 import com.example.washplus.network.local.WashPlusDao
+import com.example.washplus.wash.data.model.MonthReport
 import com.example.washplus.wash.data.model.ProductDto
 import com.example.washplus.wash.data.model.SaleDto
+import com.example.washplus.wash.data.model.YearReport
 import com.example.washplus.wash.domain.repo.IWashPlus
 import kotlinx.coroutines.flow.Flow
-import java.util.Date
 import javax.inject.Inject
 
 class WashPlusImpl @Inject constructor(private val washPlusDao: WashPlusDao) : IWashPlus {
@@ -67,6 +68,33 @@ class WashPlusImpl @Inject constructor(private val washPlusDao: WashPlusDao) : I
 
     override fun getAllSales(): Flow<List<SaleDto>> {
         return washPlusDao.getAllSales()
+    }
+
+    override fun generateReport(): String {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getAllSalesOnce(): List<YearReport> {
+        val sales = washPlusDao.getAllSalesOnce()
+        return sales
+            .groupBy { sale ->
+                sale.date.substring(0, 4).toInt()
+            }
+            .map { (year, yearSales) ->
+                val months = yearSales
+                    .groupBy { sale ->
+                        sale.date.substring(5, 7).toInt()
+                    }
+                    .map { (month, monthSales) ->
+                        MonthReport(
+                            month,
+                            monthSales.sortedBy { it.date })
+                    }
+                    .sortedBy { it.month }
+
+                YearReport(year, months)
+            }
+            .sortedBy { it.year }
     }
 
 }
